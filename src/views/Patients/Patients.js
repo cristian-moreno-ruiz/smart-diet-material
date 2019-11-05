@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import ReactTable from 'react-table';
+import 'react-table/react-table.css'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -47,26 +49,48 @@ const useStyles = makeStyles(styles);
 
 export default function TableList() {
 
-	const [patientsData, setPatientsData] = useState({});
+	const [patientsData, setPatientsData] = useState([]);
 
 	async function fetchData () {
 		console.log('fetching data from smart-diet-api');
-		
+		//debugger;
 		const res = await fetch('http://localhost:3000/patients');
 		const result = await res.json();
 		setPatientsData(result);
+		//debugger;
+		listPatients();
 	}
 
 	function listPatients () {
-		return patientsData.map(({patient}) => {
+		console.log('p',patientsData);
+
+
+		
+		return patientsData.map((patient) => {
 			return {
 				name: patient.name,
 				surnames: patient.surnames,
 				gender: patient.gender,
-				birthDate: patient.birthDate,
+				// birthDate: patient.birthDate,
 			};
 		});
 	}
+
+	const columns = [{
+		Header: 'Name',
+		accessor: 'name',
+		minWidth: 150,
+	},
+	{
+		Header: 'Surnames',
+		accessor: 'surnames',
+	},
+	{
+		Header: 'Gender',
+		accessor: 'gender',
+	}
+
+	];
 
 	useEffect(() => {
 		fetchData();
@@ -88,17 +112,15 @@ export default function TableList() {
             			</p>
 					</CardHeader>
 					<CardBody>
-						<Table
-							tableHeaderColor="primary"
-							tableHead={["Name", "Country", "City", "Salary"]}
-							tableData={[
-								['ds', "Niger", "Oud-Turnhout", "$36,738"],
-								["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-								["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-								["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-								["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-								["Mason Porter", "Chile", "Gloucester", "$78,615"]
-							]}
+					<ReactTable
+							data={listPatients()}
+							columns={columns}
+							pageSizeOptions={[1, 5, 10]}
+							className="-striped -highlight"
+							filterable
+							defaultPageSize={columns.length}
+							showPaginationBottom={true}
+							className="-striped -highlight"
 						/>
 					</CardBody>
 				</Card>
