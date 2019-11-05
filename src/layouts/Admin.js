@@ -23,7 +23,6 @@ let ps;
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -31,8 +30,6 @@ const switchRoutes = (
             key={key}
           />
         );
-      }
-      return null;
     })}
     <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
@@ -48,7 +45,7 @@ export default function Admin({ ...rest }) {
   // states and functions
   const [image, setImage] = React.useState(bgImage);
   const [color, setColor] = React.useState("blue");
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
+  const [fixedClasses, setFixedClasses] = React.useState("dropdown");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleImageClick = image => {
     setImage(image);

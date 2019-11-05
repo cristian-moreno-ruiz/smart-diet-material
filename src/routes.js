@@ -22,7 +22,12 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
-// core components/views for Admin layout
+
+// Components for Dashboard
+import Patients from "views/Patients/Patients"
+
+
+// core components/views for Admin layout Development
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
@@ -37,7 +42,14 @@ const dashboardRoutes = [
 		name: "Dashboard",
 		icon: Dashboard,
 		component: DashboardPage,
-		layout: "/admin"
+		layout: "/admin",
+	},
+	{
+		path: "/patients",
+		name: "Patients",
+		icon: "people",
+		component: Patients,
+		layout: "/admin",
 	}
 ];
 
