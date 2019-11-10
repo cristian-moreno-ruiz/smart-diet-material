@@ -47,7 +47,7 @@ const useStyles = makeStyles(styles);
 
 
 
-export default function TableList() {
+export default function Patients() {
 
 	const [patientsData, setPatientsData] = useState([]);
 
@@ -57,24 +57,10 @@ export default function TableList() {
 		const res = await fetch('http://localhost:3000/patients');
 		const result = await res.json();
 		setPatientsData(result);
+		console.log(result);
 		//debugger;
-		listPatients();
 	}
 
-	function listPatients () {
-		console.log('p',patientsData);
-
-
-		
-		return patientsData.map((patient) => {
-			return {
-				name: patient.name,
-				surnames: patient.surnames,
-				gender: patient.gender,
-				// birthDate: patient.birthDate,
-			};
-		});
-	}
 
 	const columns = [{
 		Header: 'Name',
@@ -94,7 +80,7 @@ export default function TableList() {
 
 	useEffect(() => {
 		fetchData();
-		//console.log(patients);
+		// console.log(patientsData);
 	}, []);
 
 	const classes = useStyles();
@@ -113,12 +99,12 @@ export default function TableList() {
 					</CardHeader>
 					<CardBody>
 					<ReactTable
-							data={listPatients()}
+							data={patientsData}
 							columns={columns}
 							pageSizeOptions={[1, 5, 10]}
 							className="-striped -highlight"
 							filterable
-							defaultPageSize={columns.length}
+							pageSize={patientsData.length}
 							showPaginationBottom={true}
 							className="-striped -highlight"
 						/>
