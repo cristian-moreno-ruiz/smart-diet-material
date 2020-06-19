@@ -23,13 +23,13 @@ let ps;
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+      return (
+        <Route
+          path={prop.layout + prop.path}
+          component={prop.component}
+          key={key}
+        />
+      );
     })}
     <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
@@ -93,7 +93,11 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"Creative Tim"}
+        logoText={
+          process.env.REACT_APP_NAME
+            ? process.env.REACT_APP_NAME
+            : process.env.NODE_ENV
+        }
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

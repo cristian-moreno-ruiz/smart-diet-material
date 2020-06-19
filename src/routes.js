@@ -24,8 +24,8 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
 
 // Components for Dashboard
-import Patients from "views/Patients/Patients"
-
+import Patients from "views/Patients/Patients";
+import Recipes from "views/Recipes/Recipes";
 
 // core components/views for Admin layout Development
 import DashboardPage from "views/Dashboard/Dashboard.js";
@@ -37,76 +37,83 @@ import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 
 const dashboardRoutes = [
-	{
-		path: "/dashboard",
-		name: "Dashboard",
-		icon: Dashboard,
-		component: DashboardPage,
-		layout: "/admin",
-	},
-	{
-		path: "/patients",
-		name: "Patients",
-		icon: "people",
-		component: Patients,
-		layout: "/admin",
-	}
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/admin"
+  },
+  {
+    path: "/patients",
+    name: "Patients",
+    icon: "people",
+    component: Patients,
+    layout: "/admin"
+  },
+  {
+    path: "/recipes",
+    name: "Recipes",
+    icon: "people",
+    component: Recipes,
+    layout: "/admin"
+  }
 ];
 
 const devRoutes = [
-	{
-		path: "/dashboard",
-		name: "Dashboard",
-		icon: Dashboard,
-		component: DashboardPage,
-		layout: "/admin"
-	},
-	{
-		path: "/user",
-		name: "User Profile",
-		icon: Person,
-		component: UserProfile,
-		layout: "/admin"
-	},
-	{
-		path: "/table",
-		name: "Table List",
-		icon: "content_paste",
-		component: TableList,
-		layout: "/admin"
-	},
-	{
-		path: "/typography",
-		name: "Typography",
-		icon: LibraryBooks,
-		component: Typography,
-		layout: "/admin"
-	},
-	{
-		path: "/icons",
-		name: "Icons",
-		icon: BubbleChart,
-		component: Icons,
-		layout: "/admin"
-	},
-	{
-		path: "/maps",
-		name: "Maps",
-		icon: LocationOn,
-		component: Maps,
-		layout: "/admin"
-	},
-	{
-		path: "/notifications",
-		name: "Notifications",
-		icon: Notifications,
-		component: NotificationsPage,
-		layout: "/admin"
-	}
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/admin"
+  },
+  {
+    path: "/user",
+    name: "User Profile",
+    icon: Person,
+    component: UserProfile,
+    layout: "/admin"
+  },
+  {
+    path: "/table",
+    name: "Table List",
+    icon: "content_paste",
+    component: TableList,
+    layout: "/admin"
+  },
+  {
+    path: "/typography",
+    name: "Typography",
+    icon: LibraryBooks,
+    component: Typography,
+    layout: "/admin"
+  },
+  {
+    path: "/icons",
+    name: "Icons",
+    icon: BubbleChart,
+    component: Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/maps",
+    name: "Maps",
+    icon: LocationOn,
+    component: Maps,
+    layout: "/admin"
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    icon: Notifications,
+    component: NotificationsPage,
+    layout: "/admin"
+  }
 ];
 
 const params = new URLSearchParams(window.location.search);
-const allTheme = params.get('allTheme');
+const allTheme = params.get("allTheme");
 
 const routes = allTheme ? devRoutes : dashboardRoutes;
 

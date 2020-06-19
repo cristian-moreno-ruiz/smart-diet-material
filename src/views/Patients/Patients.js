@@ -102,11 +102,10 @@ export default function Patients() {
 							data={patientsData}
 							columns={columns}
 							pageSizeOptions={[1, 5, 10]}
-							className="-striped -highlight"
 							filterable
-							pageSize={patientsData.length}
+							defaultPageSize={3} // Fix pageSize not working properly
 							showPaginationBottom={true}
-							className="-striped -highlight"
+							className="ReactTable"
 						/>
 					</CardBody>
 				</Card>
