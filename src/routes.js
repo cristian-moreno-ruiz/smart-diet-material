@@ -54,7 +54,7 @@ const dashboardRoutes = [
   {
     path: "/recipes",
     name: "Recipes",
-    icon: "people",
+    icon: "menu_book",
     component: Recipes,
     layout: "/admin"
   }
