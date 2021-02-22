@@ -13,6 +13,7 @@ import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Grid from "@material-ui/core/Grid";
 import _ from "lodash";
+import MyModalForm from "components/MyModalForm/MyModalForm.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -134,7 +135,7 @@ export default function Recipes() {
     {
       Header: "Action",
       accessor: "action",
-      minWidth: 30
+      minWidth: 40
     }
   ];
 
@@ -161,6 +162,15 @@ export default function Recipes() {
   );
 
   //const macro = 'CARB';
+  const onSubmit = async event => {
+    event.preventDefault();
+    // swal({
+    //   title: event.target.name.value,
+    //   text: event.target.email.value,
+    //   // type: "input",
+    //   buttons: ["Cancelar", "Copiar Receta"]
+    // });
+  };
 
   return (
     <GridContainer>
@@ -170,14 +180,7 @@ export default function Recipes() {
             <h4 className={classes.cardTitleWhite}>List of Recipes</h4>
             <p className={classes.cardCategoryWhite}></p>
           </CardHeader>
-          <Grid
-            container
-            alignItems="center"
-            justify="center"
-            xs={12}
-            sm={12}
-            md={12}
-          >
+          <Grid container alignItems="center" justify="center">
             {customInput("CARB")}
             {customInput("FAT")}
             {customInput("LOW_FAT_PROT")}
@@ -186,6 +189,7 @@ export default function Recipes() {
             {customInput("VEG")}
             {customInput("FRUIT")}
             {customInput("LACT")}
+            <MyModalForm triggerText="New Recipe" onSubmit={"new"} />
           </Grid>
           <CardBody>
             <ReactTable
@@ -193,9 +197,13 @@ export default function Recipes() {
                 r.idx = idx;
                 // r.composition = 17;
                 r.action = (
-                  <button onClick={() => copyRecipe(r, desired)}>
-                    Click me
-                  </button>
+                  <>
+                    <button onClick={() => copyRecipe(r, desired)}>
+                      Use Recipe
+                    </button>
+					<>     </>
+                    <MyModalForm triggerText="Edit" onSubmit={r._id} />
+                  </>
                 );
                 return r;
               })}
