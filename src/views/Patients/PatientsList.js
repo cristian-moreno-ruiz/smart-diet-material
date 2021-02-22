@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import FolderShared from "@material-ui/icons/FolderShared";
-import Straighten from "@material-ui/icons/Straighten";
-
-
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -14,9 +10,6 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import Tabs from "components/CustomTabs/CustomTabs.js";
-import PatientsList from "./PatientsList.js";
-import Measures from "./Measures";
 
 import _ from "lodash";
 
@@ -52,38 +45,64 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function Patients() {
-  
+export default function PatientsList() {
+  const [patientsData, setPatientsData] = useState([]);
 
+  async function fetchData() {
+    console.log("fetching data from smart-diet-api");
+    //debugger;
+    const res = await fetch("http://localhost:3000/patients");
+    const result = await res.json();
+    setPatientsData(result);
+    console.log(result);
+    //debugger;
+  }
+
+  const columns = [
+    {
+      Header: "Name",
+      accessor: "name",
+      minWidth: 150
+    },
+    {
+      Header: "Surnames",
+      accessor: "surnames"
+    },
+    {
+      Header: "Gender",
+      accessor: "gender"
+    }
+  ];
+
+  useEffect(() => {
+    fetchData();
+    // console.log(patientsData);
+  }, []);
+
+  const classes = useStyles();
 
   //return (JSON.stringify(patients));
 
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
-        <Tabs
-          title="Patients:"
-          headerColor="primary"
-          tabs={[
-            {
-              tabName: "List",
-              tabIcon: FolderShared,
-              tabContent: (
-                <PatientsList
-                />
-              )
-			},
-			{
-				tabName: "Measures",
-				tabIcon: Straighten,
-				tabContent: (
-				  <Measures
-				  />
-				)
-			  },
-            
-          ]}
-        />
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>List of Patients</h4>
+            <p className={classes.cardCategoryWhite}></p>
+          </CardHeader>
+          <CardBody>
+            <ReactTable
+              data={patientsData}
+              columns={columns}
+              pageSizeOptions={[1, 5, 10]}
+              filterable
+              defaultPageSize={3} // Fix pageSize not working properly
+              showPaginationBottom={true}
+              className="ReactTable"
+            />
+          </CardBody>
+        </Card>
       </GridItem>
     </GridContainer>
   );

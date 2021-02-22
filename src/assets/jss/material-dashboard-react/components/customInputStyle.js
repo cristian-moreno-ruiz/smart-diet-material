@@ -64,6 +64,12 @@ const customInputStyle = {
     margin: "27px 0 0 0",
     position: "relative",
     verticalAlign: "unset"
+  },
+  formControlNoMarginTop: {
+    paddingBottom: "10px",
+    margin: "0 0 0 0",
+    position: "relative",
+    verticalAlign: "unset"
   }
 };
 
